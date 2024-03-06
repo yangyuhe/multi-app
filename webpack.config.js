@@ -46,5 +46,11 @@ module.exports = {
         splitChunks: {
             chunks: 'all',
         },
+    },
+    resolve: {
+        fallback: {
+            stream: false,
+            buffer: false,
+        }
     }
 };
