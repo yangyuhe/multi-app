@@ -13,6 +13,15 @@ dirs.forEach(dir => {
         entries[dir] = path.resolve(__dirname, "src", dir, 'index.js')
 })
 
+const includes = fs.readFileSync(path.resolve(__dirname, "include.app"), { encoding: "utf-8" }).split("\n")
+if (includes.length > 0) {
+    let keys = Object.keys(entries)
+    keys.forEach(key => {
+        if (!includes.includes(key))
+            delete entries[key]
+    })
+}
+
 module.exports = {
     entry: entries,
     mode: 'development',

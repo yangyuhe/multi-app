@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试sse协议</title>
+</head>
+
+<body>
+    <script>
+        // let source = new EventSource("http://localhost:7001/eventsource")
+        // source.addEventListener('message', function (e) {
+        //     console.log('Event:', e.event);
+        //     console.log('Data:', e.data);
+        // }, false);
+
+        // source.addEventListener('open', function (e) {
+        //     console.log('Connection was opened.');
+        // }, false);
+
+        // source.addEventListener('error', function (e) {
+        //     console.error('EventSource failed:', e.target.url);
+        //     // source.close()
+        // }, false);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', "http://localhost:7001/eventsource", true);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === xhr.LOADING) {
+                console.log("loading:", xhr.responseText);
+            } else if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200) {
+                    console.log("end:", xhr.responseText)
+                } else {
+                    console.eror(`XHR Failed with status ${xhr.status}: ${xhr.statusText}`);
+                }
+            }
+        };
+        xhr.send()
+    </script>
+</body>
+<div>测试eventsource</div>
+
+</html>
