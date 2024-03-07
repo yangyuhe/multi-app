@@ -4,3 +4,6 @@
 [submodule "monaco-editor"]
 	path = monaco-editor
 	url = git@github.com:microsoft/monaco-editor.git
+[submodule "react-monaco-editor"]
+	path = react-monaco-editor
+	url = git@github.com:react-monaco-editor/react-monaco-editor.git
