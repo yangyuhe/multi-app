@@ -1,3 +1,6 @@
 [submodule "react-submodule"]
-	path = react-submodule
+	path = react
 	url = git@github.com:facebook/react.git
+[submodule "monaco-editor"]
+	path = monaco-editor
+	url = git@github.com:microsoft/monaco-editor.git
