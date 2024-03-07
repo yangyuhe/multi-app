@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require("fs")
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const dirs = fs.readdirSync(path.resolve(__dirname, "src"))
 const ignores = fs.readFileSync(path.resolve(__dirname, "ignore.app"), { encoding: "utf-8" }).split("\n")
@@ -48,7 +49,8 @@ module.exports = {
                 chunks: [entry]
             })
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin(),
+        new ReactRefreshWebpackPlugin()
 
     ],
     optimization: {
