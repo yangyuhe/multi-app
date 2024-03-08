@@ -7,3 +7,6 @@
 [submodule "react-monaco-editor"]
 	path = react-monaco-editor
 	url = git@github.com:react-monaco-editor/react-monaco-editor.git
+[submodule "dify"]
+	path = dify
+	url = git@github.com:langgenius/dify.git
