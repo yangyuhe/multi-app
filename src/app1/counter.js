@@ -1,7 +1,8 @@
 import * as React from 'react'
 import "./counter.css"
+import { ThemeContext } from './context'
 
 export default function Counter() {
-    const [c, setC] = React.useState(0)
-    return <div className='bg'>11{c}<button onClick={() => setC(c => c + 1)}>addxy</button></div>
+    const { value } = React.useContext(ThemeContext)
+    return <div>{value.theme}</div>
 }
