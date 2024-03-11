@@ -10,3 +10,6 @@
 [submodule "dify"]
 	path = dify
 	url = git@github.com:langgenius/dify.git
+[submodule "swr"]
+	path = swr
+	url = https://github.com/vercel/swr.git
