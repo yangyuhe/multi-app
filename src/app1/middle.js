@@ -1,15 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { ThemeContext } from "./context";
 
-
-function useSelector(context, fn) {
-    const
-}
-export function Middle({ children }) {
+export function Middle() {
 
     const { height } = useContext(ThemeContext)
-    console.log('height:', height)
+    const random = useMemo(() => {
+        return Math.random()
+    }, [height])
     return <div>
-        {height}px
+        {height}px{random}
     </div>
 }

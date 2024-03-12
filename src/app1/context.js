@@ -1,16 +1,37 @@
-import React, { useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { createContext } from "use-context-selector";
 export const ThemeContext = React.createContext()
+
 
 export function ThemeContextProvider({ children }) {
     const [value, setValue] = React.useState({
         theme: 'dark',
+        height: 10
     })
-    const [height, setHeight] = useState(0)
 
-    const val = useMemo(() => ({
-        value, setValue, height
-    }), [value, height])
-    return <ThemeContext.Provider value={val}>
+    const theme = useMemo(() => {
+        return value.theme;
+    }, [value])
+    const height = useMemo(() => {
+        return value.height;
+    }, [value])
+
+
+    return <ThemeContext.Provider value={{ setValue, theme, height }}>
         {children}
     </ThemeContext.Provider>
+}
+
+export const EffectThemeContext = createContext(null)
+
+export function EffectThemeContextProvider({ children }) {
+    const res = React.useState({
+        theme: 'dark',
+        height: 10
+    })
+
+
+    return <EffectThemeContext.Provider value={res}>
+        {children}
+    </EffectThemeContext.Provider>
 }
