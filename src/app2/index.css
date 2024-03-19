@@ -1,0 +1,11 @@
+.border-image{
+    border: 10px solid green;
+    border-image: linear-gradient(270deg, #40B0FE, #2761F3) 10;
+    background: #FFFFFF;
+
+    height: 100px;
+}
+.mark{
+    height: 10px;
+    background-color: red;
+}
