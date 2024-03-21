@@ -1,11 +1,43 @@
-.border-image{
-    background-image: url(./input-bg.svg);
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-origin: padding-box;
-    height: 200px;
+html,body,#app{
+    height: 100%;
+    margin: 0;
 }
-.mark{
-    height: 10px;
-    background-color: red;
+.father{
+    height: 100%;
+    border:3px solid red;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    .top{
+        height: 50px;
+        background-color: blue;
+        flex: 0 0 auto;
+    }
+    .content{
+        flex: 1 1 auto;
+        background-color: yellow;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        .subtop{
+            height: 50px;
+            background-color: green;
+            flex: 0 0 auto;
+        }
+        .subcontent{
+            flex: 1 1 auto;
+            overflow: auto;
+            display: flex;
+            .left{
+                background-color: aqua;
+                flex: 1;
+                overflow: auto;
+            }
+            .right{
+                background-color: blueviolet;
+                flex: 1;
+                overflow: auto;
+            }
+        }
+    }
 }

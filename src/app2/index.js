@@ -12,9 +12,26 @@ debugger;
 function App() {
   return (
     <>
-      <div className="mark"></div>
-      <div className="border-image">app2</div>
-      <em-emoji id="grinning" />
+      <div className="father">
+        <div className="top"></div>
+        <div className="content">
+          <div className="subtop"></div>
+          <div className="subcontent">
+            <div className="left">
+              {Array(10).fill(0).map((item, index) => {
+                return <div>{index}</div>
+              })}
+            </div>
+            <div className="right">
+              {Array(10).fill(0).map((item, index) => {
+                return <div>{index}</div>
+              })}
+            </div>
+          </div>
+
+
+        </div>
+      </div>
     </>
   );
 }
