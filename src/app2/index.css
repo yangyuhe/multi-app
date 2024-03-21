@@ -1,9 +1,9 @@
 .border-image{
-    border: 10px solid green;
-    border-image: linear-gradient(270deg, #40B0FE, #2761F3) 10;
-    background: #FFFFFF;
-
-    height: 100px;
+    background-image: url(./input-bg.svg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-origin: padding-box;
+    height: 200px;
 }
 .mark{
     height: 10px;
