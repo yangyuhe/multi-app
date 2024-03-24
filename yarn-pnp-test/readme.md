@@ -1,0 +1,1 @@
+yarn pnp的原理其实就是执行了NODE_OPTIONS='--require "./.pnp.js"' node index.js 
