@@ -1,5 +1,6 @@
 {
-  "name": "pnpm-test",
+  "private": true,
+  "name": "yarn-test",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,5 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "workspaces": [
+    "packages/*"
+  ]
 }
