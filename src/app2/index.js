@@ -1,13 +1,30 @@
 import { createRoot } from "react-dom/client";
 import * as React from "react";
-import "../util";
-import "./index.css";
-import * as _ from "lodash";
-import dest from "./dest.json";
-import source from "./source.json";
+import { types } from "mobx-state-tree"
 
-const res = _.merge(dest, source);
-debugger;
+const Store = types.model({
+  person: types.maybeNull(types.model({
+    name: types.string,
+    age: types.integer
+  }))
+}).actions(self => {
+  return {
+    setPerson(person) {
+      self.person = person
+    }
+  }
+})
+const store = Store.create({
+  person: null
+})
+let person = {
+  name: 'hx',
+  age: 12,
+  address: "88"
+}
+store.setPerson(person)
+console.log(store.person, person);
+
 
 function App() {
   return (
