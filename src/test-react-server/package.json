@@ -1,0 +1,14 @@
+{
+  "name": "test-react-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-server": "rm -rf dist && babel src -d dist/src && babel server -d dist/server",
+    "generate-html": "cd dist/server && node --experimental-default-type=module index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

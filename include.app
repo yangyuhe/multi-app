@@ -1,1 +1,1 @@
-app2
+test-react-server

@@ -8,23 +8,25 @@ const dirs = fs.readdirSync(path.resolve(__dirname, "src"));
 const ignores = fs
   .readFileSync(path.resolve(__dirname, "ignore.app"), { encoding: "utf-8" })
   .split("\n");
-const entries = {};
-dirs.forEach((dir) => {
-  const p = path.resolve(__dirname, "src", dir);
-  const isdir = fs.statSync(p).isDirectory();
-  if (isdir && !ignores.includes(dir))
-    entries[dir] = path.resolve(__dirname, "src", dir, "index.js");
-});
 
 const includes = fs
   .readFileSync(path.resolve(__dirname, "include.app"), { encoding: "utf-8" })
   .split("\n");
-if (includes.length > 0) {
-  let keys = Object.keys(entries);
-  keys.forEach((key) => {
-    if (!includes.includes(key)) delete entries[key];
-  });
-}
+
+const entries = {};
+const statics = []
+dirs.forEach((dir) => {
+  const p = path.resolve(__dirname, "src", dir);
+  const isdir = fs.statSync(p).isDirectory();
+  if (isdir && !ignores.includes(dir) && includes.includes(dir)) {
+    entries[dir] = path.resolve(__dirname, "src", dir, "index.js");
+    statics.push({
+      directory: path.resolve(__dirname, "src", dir, "static"),
+      serveIndex: true,
+      publicPath: "/" + dir
+    });
+  }
+});
 
 module.exports = {
   entry: entries,
@@ -58,15 +60,18 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new ReactRefreshWebpackPlugin(),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-    },
-  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: "all",
+  //   },
+  // },
   resolve: {
     fallback: {
       stream: false,
       buffer: false,
     },
   },
+  devServer: {
+    static: statics
+  }
 };
