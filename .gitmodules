@@ -13,3 +13,6 @@
 [submodule "swr"]
 	path = swr
 	url = https://github.com/vercel/swr.git
+[submodule "recorder"]
+	path = recorder
+	url = git@github.com:2fps/recorder.git
