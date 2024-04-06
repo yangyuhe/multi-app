@@ -24,37 +24,42 @@ console.log("metadata.languages:", metadata)
 //     }
 // };
 
+async function getAssetContent(path) {
+    return fetch(path).then(res => res.text())
+}
+async function getAssets() {
+    return {
+        "/foo.js": await getAssetContent("/foo.js"),
+        "/index.js": await getAssetContent("/index.js"),
+    }
+}
+
 export function App() {
+    const containerRef = React.useRef()
+    const editorRef = React.useRef()
 
-    const div = useRef(null)
     useEffect(() => {
-        var editor = monaco.editor.create(div.current, {
-            value: "// First line\nfunction hello() {\n\talert('Hello world!');\n}\n// Last line",
-            language: "javascript",
+        (async () => {
+            editorRef.current = monaco.editor.create(containerRef.current)
+            const assets = await getAssets()
+            console.log(assets)
+            Object.entries(assets).forEach(item => {
+                const uri = new monaco.Uri().with({ path: item[0] })
+                console.log(uri)
+                monaco.editor.createModel(item[1], 'javascript', uri)
+            })
+            const models = monaco.editor.getModels()
+            editorRef.current.setModel(models[2])
+        })()
 
-            lineNumbers: "off",
-            roundedSelection: false,
-            scrollBeyondLastLine: false,
-            readOnly: false,
-            theme: "vs-dark",
-        });
-        setTimeout(function () {
-            editor.updateOptions({
-                lineNumbers: "on",
-            });
-        }, 2000);
+
+
     }, [])
-    return (
-        // <MonacoEditor
-        //     width="800"
-        //     height="600"
-        //     language="javascript"
-        //     theme="vs-dark"
-        //     value={code}
-        //     options={options}
-        // />
-        <div style={{ height: "500px" }} ref={div}></div>
-    );
+
+    return <div ref={containerRef} style={{ height: '500px' }}>
+
+    </div>
+
 }
 
 const rootDom = document.getElementById("app")

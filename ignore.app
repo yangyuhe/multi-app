@@ -4,3 +4,4 @@ analyse-package
 test-monaco
 test-nextjs
 simple-static
+test-worker

@@ -17,6 +17,7 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -41,5 +42,10 @@ module.exports = {
             // available options are documented at https://github.com/microsoft/monaco-editor/blob/main/webpack-plugin/README.md#options
             languages: ['json', 'javascript', 'typescript']
         })
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
+    },
 };
