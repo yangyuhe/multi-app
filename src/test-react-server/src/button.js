@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "./context";
 export default function Button() {
     const { name } = useContext(UserContext)
+    const [count] = useState(20)
     return <button onClick={() => {
         alert("hello")
-    }}>{name}</button>
+    }}>{name}{count}</button>
 }

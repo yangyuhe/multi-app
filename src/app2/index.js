@@ -29,24 +29,31 @@ console.log(store.person, person);
 function App() {
   return (
     <>
-      <div className="father">
-        <div className="top"></div>
-        <div className="content">
-          <div className="subtop"></div>
-          <div className="subcontent">
-            <div className="left">
-              {Array(10).fill(0).map((item, index) => {
-                return <div>{index}</div>
-              })}
-            </div>
-            <div className="right">
-              {Array(10).fill(0).map((item, index) => {
-                return <div>{index}</div>
-              })}
-            </div>
-          </div>
-
-
+      <div className="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="my-accordion-2" defaultChecked />
+        <div className="collapse-title text-xl font-medium">
+          Click to open this one and close others
+        </div>
+        <div className="collapse-content">
+          <p>hello</p>
+        </div>
+      </div>
+      <div className="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="my-accordion-2" />
+        <div className="collapse-title text-xl font-medium">
+          Click to open this one and close others
+        </div>
+        <div className="collapse-content">
+          <p>hello</p>
+        </div>
+      </div>
+      <div className="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="my-accordion-2" />
+        <div className="collapse-title text-xl font-medium">
+          Click to open this one and close others
+        </div>
+        <div className="collapse-content">
+          <p>hello</p>
         </div>
       </div>
     </>
