@@ -16,3 +16,6 @@
 [submodule "recorder"]
 	path = recorder
 	url = git@github.com:2fps/recorder.git
+[submodule "monaco-editor-boilerplate"]
+	path = monaco-editor-boilerplate
+	url = git@github.com:satya164/monaco-editor-boilerplate.git
