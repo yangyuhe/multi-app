@@ -19,7 +19,7 @@ dirs.forEach((dir) => {
   const p = path.resolve(__dirname, "src", dir);
   const isdir = fs.statSync(p).isDirectory();
   if (isdir && !ignores.includes(dir) && includes.includes(dir)) {
-    entries[dir] = path.resolve(__dirname, "src", dir, "index.js");
+    entries[dir] = path.resolve(__dirname, "src", dir, "index");
     statics.push({
       directory: path.resolve(__dirname, "src", dir, "static"),
       serveIndex: true,
@@ -40,7 +40,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /(\.jsx?$|\.tsx?$)/,
         use: ["babel-loader"],
       },
       {
@@ -60,16 +60,17 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new ReactRefreshWebpackPlugin(),
   ],
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: "all",
-  //   },
-  // },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   resolve: {
     fallback: {
       stream: false,
       buffer: false,
     },
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   devServer: {
     static: statics

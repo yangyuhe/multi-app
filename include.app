@@ -1,2 +1,1 @@
-test-tailwindcss
-app2
+mind
