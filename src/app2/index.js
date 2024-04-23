@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import * as React from "react";
 import { types } from "mobx-state-tree"
+import "./index.css"
 
 const Store = types.model({
   person: types.maybeNull(types.model({
@@ -32,7 +33,7 @@ async function Test() {
 }
 function App() {
   return (
-    <Test />
+    <p className="father">hello</p>
 
   );
 }
