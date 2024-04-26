@@ -1,70 +1,323 @@
 {
-  "id": "37048973-12d5-444e-8434-5bf74270cea1",
-  "name": "ffff",
-  "mode": "chat",
-  "icon": "grinning",
-  "icon_background": "#FBE8FF",
-  "enable_site": true,
-  "enable_api": true,
-  "api_rpm": 0,
-  "api_rph": 0,
-  "is_agent": false,
-  "is_demo": false,
-  "model_config": {
-    "opening_statement": null,
-    "suggested_questions": [],
-    "suggested_questions_after_answer": { "enabled": false },
-    "speech_to_text": { "enabled": false },
-    "text_to_speech": { "enabled": false },
-    "retriever_resource": { "enabled": false },
-    "annotation_reply": { "enabled": false },
-    "more_like_this": { "enabled": false },
-    "sensitive_word_avoidance": { "enabled": false, "type": "", "configs": [] },
-    "external_data_tools": [],
-    "model": {
-      "provider": "ollama",
-      "name": "llama2",
-      "mode": "chat",
-      "completion_params": {}
+  "info": {
+    "description": "github apis",
+    "title": "github_api",
+    "version": "v1"
+  },
+  "openapi": "3.0.1",
+  "paths": {
+    "/repos/{owner}/{repo}/issues": {
+      "get": {
+        "operationId": "issuelist",
+        "parameters": [
+          {
+            "description": "owner of the repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": { "description": "owner of the repo", "type": "string" }
+          },
+          {
+            "description": "name of the repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": { "description": "name of the repo", "type": "string" }
+          },
+          {
+            "description": "creator of the issue",
+            "in": "query",
+            "name": "creator",
+            "schema": {
+              "description": "creator of the issue",
+              "type": "string"
+            }
+          },
+          {
+            "description": "a constant value: application/vnd.github.full+json",
+            "in": "header",
+            "name": "accept",
+            "required": true,
+            "schema": {
+              "description": "a constant value: application/vnd.github.full+json",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "type": "object" } } }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "issue list",
+                  "items": {
+                    "description": "one issue",
+                    "properties": {
+                      "body": {
+                        "description": "markdown of the issue content",
+                        "type": "string"
+                      },
+                      "body_html": {
+                        "description": "html of the issue content",
+                        "type": "string"
+                      },
+                      "body_text": {
+                        "description": "text of the issue content",
+                        "type": "string"
+                      },
+                      "title": {
+                        "description": "title of the issue",
+                        "type": "string"
+                      },
+                      "url": {
+                        "description": "url of the issue",
+                        "type": "string"
+                      }
+                    },
+                    "required": ["body_html", "body_text"],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "new desc"
+          },
+          "default": { "description": "" }
+        },
+        "summary": "list issues"
+      },
+      "post": {
+        "operationId": "create_issue",
+        "parameters": [
+          {
+            "description": "owner of the repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": { "type": "string", "description": "owner of the repo" }
+          },
+          {
+            "description": "name of the repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": { "type": "string", "description": "name of the repo" }
+          },
+          {
+            "description": "label of the issue",
+            "in": "query",
+            "name": "labels",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "description": "label of the issue",
+              "items": { "type": "string", "description": "label items" }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["body", "title"],
+                "properties": {
+                  "body": {
+                    "type": "string",
+                    "description": "content of the issue"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "title of the issue"
+                  },
+                  "test": {
+                    "type": "array",
+                    "description": "test",
+                    "items": {
+                      "type": "object",
+                      "required": [],
+                      "description": "testssss",
+                      "properties": {
+                        "aa": {
+                          "type": "object",
+                          "required": [],
+                          "description": "aa",
+                          "properties": {
+                            "aaa": { "type": "string", "description": "aaa" },
+                            "bbb": { "type": "string", "description": "bbb" }
+                          }
+                        },
+                        "bb": { "type": "string", "description": "bb" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["url", "user"],
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "url of the issue"
+                    },
+                    "user": {
+                      "type": "object",
+                      "required": ["login"],
+                      "description": "user who commit the issue",
+                      "properties": {
+                        "login": {
+                          "type": "string",
+                          "description": "name of the user"
+                        },
+                        "xx": {
+                          "type": "array",
+                          "description": "xx",
+                          "items": {
+                            "type": "object",
+                            "required": [],
+                            "description": "xxx",
+                            "properties": {
+                              "ww": { "type": "string", "description": "ww" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "new desc"
+          },
+          "default": { "description": "" }
+        },
+        "summary": "create an repo issue"
+      }
     },
-    "user_input_form": [],
-    "dataset_query_variable": null,
-    "pre_prompt": null,
-    "agent_mode": {
-      "enabled": false,
-      "strategy": null,
-      "tools": [],
-      "prompt": null
+    "/repos/{owner}/{repo}/issues/{issue_number}": {
+      "get": {
+        "operationId": "issues",
+        "parameters": [
+          {
+            "description": "owner of a rep",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": { "description": "owner of a rep", "type": "string" }
+          },
+          {
+            "description": "name of a repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": { "description": "name of a repo", "type": "string" }
+          },
+          {
+            "description": "id of issue",
+            "in": "path",
+            "name": "issue_number",
+            "required": true,
+            "schema": { "description": "id of issue", "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "type": "object" } } }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": { "description": "id of issue", "type": "number" },
+                    "title": {
+                      "description": "title of issue",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "title"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "new desc"
+          },
+          "default": { "description": "" }
+        },
+        "summary": "show issues of repo"
+      }
     },
-    "prompt_type": "simple",
-    "chat_prompt_config": {},
-    "completion_prompt_config": {},
-    "dataset_configs": { "retrieval_model": "single" },
-    "file_upload": {
-      "image": {
-        "enabled": false,
-        "number_limits": 3,
-        "detail": "high",
-        "transfer_methods": ["remote_url", "local_file"]
+    "/repos/{owner}/{repo}/pulls/{pull_number}": {
+      "get": {
+        "operationId": "pullrequrest",
+        "parameters": [
+          {
+            "description": "owner of repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": { "description": "owner of repo", "type": "string" }
+          },
+          {
+            "description": "name of repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": { "description": "name of repo", "type": "string" }
+          },
+          {
+            "description": "number of pull request",
+            "in": "path",
+            "name": "pull_number",
+            "required": true,
+            "schema": {
+              "description": "number of pull request",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": { "application/json": { "schema": { "type": "object" } } }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "description": "id of a pull request",
+                      "type": "number"
+                    },
+                    "title": {
+                      "description": "title of a pull request",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "title"],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "new desc"
+          },
+          "default": { "description": "" }
+        },
+        "summary": "view a pull request of a repo"
       }
     }
   },
-  "site": {
-    "access_token": "vNcHeKX82CeAzUtf",
-    "code": "vNcHeKX82CeAzUtf",
-    "title": "ffff",
-    "icon": "grinning",
-    "icon_background": "#FBE8FF",
-    "description": null,
-    "default_language": "zh-Hans",
-    "customize_domain": null,
-    "copyright": null,
-    "privacy_policy": null,
-    "customize_token_strategy": "not_allow",
-    "prompt_public": false,
-    "app_base_url": "http://10.253.6.77"
-  },
-  "api_base_url": "http://10.253.6.77/v1",
-  "created_at": 1710930059,
-  "deleted_tools": []
+  "servers": [{ "url": "https://api.github.com" }]
 }
