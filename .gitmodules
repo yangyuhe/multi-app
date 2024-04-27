@@ -19,3 +19,6 @@
 [submodule "monaco-editor-boilerplate"]
 	path = monaco-editor-boilerplate
 	url = git@github.com:satya164/monaco-editor-boilerplate.git
+[submodule "G6"]
+	path = G6
+	url = https://github.com/antvis/G6.git

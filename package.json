@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@ant-design/pro-chat": "^1.9.3",
-    "@antv/g6": "^4.8.24",
+    "@antv/g6": "latest",
+    "@antv/x6": "^2.18.1",
     "@arco-design/web-react": "^2.60.2",
     "@arco-themes/react-ocean-design": "^0.0.96",
     "@babel/cli": "^7.24.1",
