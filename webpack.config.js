@@ -19,7 +19,16 @@ dirs.forEach((dir) => {
   const p = path.resolve(__dirname, "src", dir);
   const isdir = fs.statSync(p).isDirectory();
   if (isdir && !ignores.includes(dir) && includes.includes(dir)) {
-    entries[dir] = path.resolve(__dirname, "src", dir, "index");
+    const root = path.resolve(__dirname, "src", dir)
+
+    const files = fs.readdirSync(root)
+    files.forEach(file => {
+      const fileName = file.slice(0, -path.extname(file).length)
+      if (file.match(/(index\.(t|j)sx?)|(page\w+\.(t|j)sx?)/)) {
+        entries[dir + '/' + fileName] = path.resolve(root, file);
+      }
+    })
+
     statics.push({
       directory: path.resolve(__dirname, "src", dir, "static"),
       serveIndex: true,
