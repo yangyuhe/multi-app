@@ -2,9 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-canvas{
-    border: 1px solid blue;
+canvas {
+  border: 1px solid blue;
 }
-#container{
-    border: 1px solid red;
+#container {
+  border: 1px solid red;
+}
+
+.x6-edge:hover path:nth-child(2) {
+  stroke: red;
+  stroke-width: 1px;
+}
+.x6-edge:hover .x6-edge-label rect {
+  fill: red;
 }
