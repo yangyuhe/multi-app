@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "weiruanyaheix";
+  src: url("./weiruan.ttf");
+}
+.weiruanyahei {
+  font-family: "weiruanyaheix";
+  color: red;
+}
