@@ -22,3 +22,6 @@
 [submodule "G6"]
 	path = G6
 	url = https://github.com/antvis/G6.git
+[submodule "X6"]
+	path = X6
+	url = https://github.com/antvis/X6.git
