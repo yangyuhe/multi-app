@@ -2,8 +2,6 @@ import { Graph, Model, Options, Shape, ToolsView } from "@antv/x6";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import * as React from "react";
-import { GridLayout } from "@antv/layout";
-import { preset } from "swr/dist/_internal";
 
 class TooltipTool extends ToolsView.ToolItem {
   private knob: HTMLDivElement;

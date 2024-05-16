@@ -25,3 +25,6 @@
 [submodule "X6"]
 	path = X6
 	url = https://github.com/antvis/X6.git
+[submodule "html2pdf.js"]
+	path = html2pdf.js
+	url = https://github.com/eKoopmans/html2pdf.js.git
