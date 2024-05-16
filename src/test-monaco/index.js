@@ -104,7 +104,13 @@ export function App() {
           editorRef.current.setModel(model);
         }
       });
+
       console.log(monaco.editor.getModels());
+      setTimeout(() => {
+        let height = editorRef.current.getContentHeight()
+        editorRef.current.layout({ height, width: 500 })
+      }, 0);
+
       console.log(
         monaco.languages.typescript.javascriptDefaults.getExtraLibs()
       );
@@ -135,9 +141,8 @@ export function App() {
         })}
       </div>
       <div
-        className="flex-auto"
+        className="flex-auto border-red-400 border-[1px]"
         ref={containerRef}
-        style={{ height: "500px" }}
       ></div>
     </div>
   );
