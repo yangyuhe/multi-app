@@ -38,6 +38,8 @@
     "buffer": "^6.0.3",
     "css-loader": "^6.10.0",
     "daisyui": "^4.10.1",
+    "eslint": "^8",
+    "eslint-plugin-react": "^7.34.1",
     "event-source-polyfill": "^1.0.31",
     "file-loader": "^6.2.0",
     "flowbite": "^2.3.0",
