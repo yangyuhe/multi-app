@@ -43,6 +43,20 @@ async function getAssets() {
 //   noSyntaxValidation: false,
 // });
 
+monaco.editor.defineTheme("appforge-theme", {
+  base: "vs",
+  inherit: true,
+  colors: {
+    "editorGutter.background": "#007DFA",
+    "editorLineNumber.foreground": "#fff",
+    "editorWidget.border": "#ff0000",
+    "editorHoverWidget.border": "#ff0000",
+    "input.border": "#ff0000",
+    "scrollbar.shadow": "#ff000000",
+  },
+  rules: [],
+});
+
 export function App() {
   const containerRef = React.useRef();
   const editorRef = React.useRef();
@@ -61,7 +75,7 @@ export function App() {
 
       editorRef.current = monaco.editor.create(
         containerRef.current,
-        { model: null },
+        { model: null, theme: "appforge-theme" },
         {
           openCodeEditor: async ({ resource, options }, editor) => {
             debugger;
@@ -107,8 +121,8 @@ export function App() {
 
       console.log(monaco.editor.getModels());
       setTimeout(() => {
-        let height = editorRef.current.getContentHeight()
-        editorRef.current.layout({ height, width: 500 })
+        let height = editorRef.current.getContentHeight();
+        editorRef.current.layout({ height, width: 500 });
       }, 0);
 
       console.log(
@@ -140,10 +154,7 @@ export function App() {
           );
         })}
       </div>
-      <div
-        className="flex-auto border-red-400 border-[1px]"
-        ref={containerRef}
-      ></div>
+      <div className="flex-auto " ref={containerRef}></div>
     </div>
   );
 }
