@@ -1,0 +1,11 @@
+{
+  "name": "test-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc src/util.ts -p tsconfig.json"
+  },
+  "author": "",
+  "license": "ISC"
+}
