@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc src/util.ts -p tsconfig.json"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC"
