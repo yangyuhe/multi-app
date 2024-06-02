@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-        let registration;
-        navigator.serviceWorker.register("./sw.js")
-        navigator.serviceWorker.ready.then(res => registration = res)
+      let registration;
+      navigator.serviceWorker.register("./sw.js");
+      navigator.serviceWorker.ready.then((res) => (registration = res));
 
-        function send() {
-            registration.active.postMessage("helllo")
-        }
+      function send() {
+        registration.active.postMessage("helllo");
+      }
+      navigator.serviceWorker.addEventListener("controllerchange", (evt) => {
+        console.log("controllerchange:", evt);
+      });
+      console.log("循环获取");
+      fetch("./foo/foo.js");
+      setInterval(() => {
+        fetch("./foo/foo.js");
+      }, 3000);
     </script>
+    <script type="module" src="./foo/foo.js"></script>
     <button onclick="send()">send</button>
-
-</body>
-
+  </body>
 </html>
