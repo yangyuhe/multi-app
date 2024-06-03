@@ -29,7 +29,11 @@ self.addEventListener("activate", (evt) => {
 });
 
 self.addEventListener("fetch", async (evt) => {
-  console.log(version + " fetched " + evt.request.url);
+  console.log(
+    version + " fetched " + evt.request.url,
+    "referrer:",
+    evt.request.referrer
+  );
   // evt.respondWith(fetch(evt.request));
 });
 
