@@ -82,6 +82,7 @@
     "react-refresh": "^0.14.0"
   },
   "workspaces": [
-    "src/*"
+    "src/*",
+    "!src/test-rollup"
   ]
 }
