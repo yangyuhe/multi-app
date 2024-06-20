@@ -1,11 +1,23 @@
 import type { RollupOptions } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 
-export default {
-  input: "src/index.ts",
-  output: {
-    file: "dist/bundle.js",
-    format: "cjs",
+export default [
+  {
+    input: "src/index.ts",
+    output: {
+      format: "es",
+      dir: "dist",
+    },
+    external: ["os"],
+    plugins: [typescript()],
   },
-  plugins: [typescript()],
-} as RollupOptions;
+  {
+    input: "src/web/index.ts",
+    output: {
+      format: "es",
+      file: "dist/web_index.js",
+    },
+    external: ["os"],
+    plugins: [typescript()],
+  },
+] as RollupOptions[];
