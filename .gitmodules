@@ -28,3 +28,6 @@
 [submodule "html2pdf.js"]
 	path = html2pdf.js
 	url = https://github.com/eKoopmans/html2pdf.js.git
+[submodule "submodules/whistle-examples"]
+	path = submodules/whistle-examples
+	url = git@github.com:whistle-plugins/examples.git
