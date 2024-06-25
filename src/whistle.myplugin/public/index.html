@@ -5,14 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Whistle插件</title>
+    <script src="./jquery-3.7.1.min.js"></script>
   </head>
   <body>
-    <form action="/post">
-      <input name="name" />
-      <input name="foo" />
-      <input name="bar" />
-      <input name="barxx" />
-      <button type="submit">保存</button>
+    <button style="margin-bottom: 10px">添加域名</button>
+    <form class="form" action="/post">
+      <div class="domain-block" style="padding: 5px; border: 1px solid black">
+        <label for="domain[0]">域名</label>
+        <input type="text" id="domain[0]" name="domain[0]" />
+        <button class="add-plugin">添加plugin</button>
+      </div>
     </form>
   </body>
+  <script>
+    const form = $(".form");
+    form.on("click", ".add-plugin", function () {
+      console.log(this);
+      debugger;
+      const curNum = form.find(".domain-block").length;
+      const newDomain = $(".domain-block").clone();
+      const newId = `domain[${curNum + 1}]`;
+      newDomain.find("label").attr("for", newId);
+      newDomain.find("input").attr({
+        id: newId,
+        name: newId,
+      });
+      form.append(newDomain);
+    });
+  </script>
 </html>

@@ -4,5 +4,8 @@
     "eslint.codeActionsOnSave.mode": "all",
     "editor.codeActionsOnSave": {
         "source.fixAll": "always",
+      },
+      "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
       }
 }
