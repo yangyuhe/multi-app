@@ -1,0 +1,10 @@
+[
+  {
+    "domain": "cecstackzsarm.user.cecloud.com",
+    "plugin": [
+      {
+        "console-plugin-appforge": "http://localhost:9001"
+      }
+    ]
+  }
+]
