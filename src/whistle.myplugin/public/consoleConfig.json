@@ -3,7 +3,8 @@
     "domain": "cecstackzsarm.user.cecloud.com",
     "plugin": [
       {
-        "console-plugin-appforge": "http://localhost:9001"
+        "name": "console-plugin-appforge",
+        "url": "http://localhost:9001"
       }
     ]
   }

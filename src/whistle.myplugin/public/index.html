@@ -6,31 +6,72 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Whistle插件</title>
     <script src="./jquery-3.7.1.min.js"></script>
+    <style>
+      input {
+        width: 300px;
+      }
+    </style>
   </head>
   <body>
-    <button style="margin-bottom: 10px">添加域名</button>
-    <form class="form" action="/post">
-      <div class="domain-block" style="padding: 5px; border: 1px solid black">
-        <label for="domain[0]">域名</label>
-        <input type="text" id="domain[0]" name="domain[0]" />
-        <button class="add-plugin">添加plugin</button>
-      </div>
-    </form>
+    <button class="add-domain" style="margin-bottom: 10px">添加域名</button>
+    <form class="form" method="post" action="/post"></form>
   </body>
   <script>
-    const form = $(".form");
-    form.on("click", ".add-plugin", function () {
-      console.log(this);
-      debugger;
-      const curNum = form.find(".domain-block").length;
-      const newDomain = $(".domain-block").clone();
-      const newId = `domain[${curNum + 1}]`;
-      newDomain.find("label").attr("for", newId);
-      newDomain.find("input").attr({
-        id: newId,
-        name: newId,
+    const renderPlugin = (prefix, index, name, value) => {
+      return `<div class="plugin-item" style="margin-bottom:5px;">
+          <label>plugin名称：<input name="${prefix}.plugin[${index}].name" value="${name}"/></label>
+          <label>地址：<input name="${prefix}.plugin[${index}].url" value="${value}"/></label>
+        </div>`;
+    };
+    const renderDomain = (index, domain, plugins) => {
+      const pluginItems = plugins.map((item, index) => {
+        return renderPlugin(`domain[${index}]`, index, item.name, item.url);
       });
+      const pluginHtml = `<div class="plugin-block" style="border:1px black dashed;padding:5px;margin-top:5px;">
+          ${
+            pluginItems.length > 0
+              ? pluginItems.join("")
+              : renderPlugin(`domain[${index}]`, 0, "", "")
+          }
+        </div>`;
+      return `<div data-index="${index}"" class="domain-block" style="padding: 5px; border: 1px solid black;margin-bottom:5px;">
+        <label>
+          域名：<input type="text" value="${domain}" name="domain[${index}].name" />
+        </label>
+        <button type="button" class="add-plugin" >添加plugin</button>
+        ${pluginHtml}
+      </div>`;
+    };
+    const form = $(".form");
+    $(".add-domain").on("click", function () {
+      const curNum = form.find(".domain-block").length;
+      const newDomain = renderDomain(curNum, "", []);
       form.append(newDomain);
     });
+    form.on("click", ".add-plugin", function () {
+      console.log(this);
+      const domainBlock = $(this).parents(".domain-block");
+      const plugins = domainBlock.find(".plugin-item");
+      const newPlugin = renderPlugin(
+        `domain[${domainBlock.data("index")}]`,
+        plugins.length,
+        "",
+        ""
+      );
+      domainBlock.find(".plugin-block").append(newPlugin);
+    });
+    $.ajax(location.pathname + "cgi-bin/console-config").then(
+      (res) => {
+        if (res.length === 0) form.append(renderDomain(0, "", []), "", []);
+        else {
+          res.forEach((item, index) => {
+            form.append(renderDomain(index, item.domain, item.plugin || []));
+          });
+        }
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   </script>
 </html>
