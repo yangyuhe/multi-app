@@ -32,7 +32,13 @@ export default (
             svrRes.headers["content-encoding"] = "identify";
             console.log(svrRes.headers);
             res.writeHead(svrRes.statusCode, svrRes.headers);
-            res.end(body.join(""));
+            const locData = JSON.parse(body.join(""));
+            const loc = locData.addr.find((i) =>
+              i.POLICYNAME.includes("金融港B14")
+            );
+            loc.CLOCKIP = loc.CLOCKIP_LBS = "114.372081#30.502614";
+            console.log(loc);
+            res.end(JSON.stringify(locData));
           });
           svrRes.pipe(gunzipped);
 
