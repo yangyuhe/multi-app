@@ -1,0 +1,27 @@
+# console-plugin-appforgea
+^cecstackzsarm.user.cecloud.com/console/api/plugins/console-plugin-appforgea/*** http://localhost:9001/$1
+^cecstackzsarm.user.cecloud.com/console/static/umd/public/static/umd/react@17.0.1.production.min.js cecstackzsarm.user.cecloud.com/console/static/umd/public/static/umd/react@17.0.1.development.js
+^cecstackzsarm.user.cecloud.com/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js cecstackzsarm.user.cecloud.com/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js
+^cecstackzsarm.user.cecloud.com/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js cecstackzsarm.user.cecloud.com/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js
+
+
+# xx
+^aa/console/api/plugins/xx/*** xxsss/$1
+^aa/console/static/umd/public/static/umd/react@17.0.1.production.min.js aa/console/static/umd/public/static/umd/react@17.0.1.development.js
+^aa/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js aa/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js
+^aa/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js aa/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js
+
+
+# qqx
+^aa/console/api/plugins/qqx/*** qq/$1
+^aa/console/static/umd/public/static/umd/react@17.0.1.production.min.js aa/console/static/umd/public/static/umd/react@17.0.1.development.js
+^aa/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js aa/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js
+^aa/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js aa/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js
+
+
+# console-plugin-aidp
+^**/console/api/plugins/console-plugin-aidp/*** http://localhost:9002/$2
+^**/console/static/umd/public/static/umd/react@17.0.1.production.min.js $1/console/static/umd/public/static/umd/react@17.0.1.development.js
+^**/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js $1/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js
+^**/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js $1/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js
+

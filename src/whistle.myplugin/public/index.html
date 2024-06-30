@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Whistle插件</title>
     <script src="./jquery-3.7.1.min.js"></script>
+    <script src="./lodash-4.17.21.min.js"></script>
     <style>
       input {
         width: 300px;
@@ -14,29 +15,35 @@
   </head>
   <body>
     <button class="add-domain" style="margin-bottom: 10px">添加域名</button>
-    <form class="form" method="post" action="/post"></form>
+    <button class="apply" disabled style="margin-bottom: 10px">应用</button>
+    <form
+      enctype="multipart/form-data"
+      class="form"
+      method="post"
+      action="/post"
+    ></form>
   </body>
   <script>
     const renderPlugin = (prefix, index, name, value) => {
       return `<div class="plugin-item" style="margin-bottom:5px;">
-          <label>plugin名称：<input name="${prefix}.plugin[${index}].name" value="${name}"/></label>
-          <label>地址：<input name="${prefix}.plugin[${index}].url" value="${value}"/></label>
+          <label>plugin名称：<input required name="${prefix}.plugin[${index}].name" value="${name}"/></label>
+          <label>地址：<input required name="${prefix}.plugin[${index}].url" value="${value}"/></label>
         </div>`;
     };
     const renderDomain = (index, domain, plugins) => {
-      const pluginItems = plugins.map((item, index) => {
-        return renderPlugin(`domain[${index}]`, index, item.name, item.url);
+      const pluginItems = plugins.map((item, subindex) => {
+        return renderPlugin(`[${index}]`, subindex, item.name, item.url);
       });
       const pluginHtml = `<div class="plugin-block" style="border:1px black dashed;padding:5px;margin-top:5px;">
           ${
             pluginItems.length > 0
               ? pluginItems.join("")
-              : renderPlugin(`domain[${index}]`, 0, "", "")
+              : renderPlugin(`[${index}]`, 0, "", "")
           }
         </div>`;
       return `<div data-index="${index}"" class="domain-block" style="padding: 5px; border: 1px solid black;margin-bottom:5px;">
         <label>
-          域名：<input type="text" value="${domain}" name="domain[${index}].name" />
+          域名：<input required  value="${domain}" name="[${index}].domain" />
         </label>
         <button type="button" class="add-plugin" >添加plugin</button>
         ${pluginHtml}
@@ -53,15 +60,18 @@
       const domainBlock = $(this).parents(".domain-block");
       const plugins = domainBlock.find(".plugin-item");
       const newPlugin = renderPlugin(
-        `domain[${domainBlock.data("index")}]`,
+        `[${domainBlock.data("index")}]`,
         plugins.length,
         "",
         ""
       );
       domainBlock.find(".plugin-block").append(newPlugin);
     });
+
+    let oldValue;
     $.ajax(location.pathname + "cgi-bin/console-config").then(
       (res) => {
+        oldValue = res;
         if (res.length === 0) form.append(renderDomain(0, "", []), "", []);
         else {
           res.forEach((item, index) => {
@@ -73,5 +83,37 @@
         console.error(err);
       }
     );
+
+    const applyBtn = $(".apply");
+    let newValue = [];
+    form.on("input", () => {
+      newValue = [];
+      let vals = form.serializeArray();
+      vals.forEach(({ name, value }) => {
+        _.set(newValue, name, value);
+      });
+
+      if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+        applyBtn.attr("disabled", false);
+      } else {
+        applyBtn.attr("disabled", true);
+      }
+    });
+
+    applyBtn.on("click", () => {
+      if (form[0].reportValidity()) {
+        console.log(newValue);
+        alert("应用成功");
+        applyBtn.attr("disabled", true);
+        $.ajax(location.pathname + "cgi-bin/console-config", {
+          method: "post",
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          data: JSON.stringify(newValue),
+        }).then((res) => {
+          console.log(res);
+        });
+      }
+    });
   </script>
 </html>
