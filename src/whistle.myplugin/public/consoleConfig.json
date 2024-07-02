@@ -1,32 +1,10 @@
 [
   {
-    "domain": "cecstackzsarm.user.cecloud.com",
-    "plugin": [
-      {
-        "name": "console-plugin-appforgea",
-        "url": "http://localhost:9001"
-      }
-    ]
-  },
-  {
-    "domain": "aa",
-    "plugin": [
-      {
-        "name": "xx",
-        "url": "xxsss"
-      },
-      {
-        "name": "qqx",
-        "url": "qq"
-      }
-    ]
-  },
-  {
     "domain": "*",
     "plugin": [
       {
-        "name": "console-plugin-aidp",
-        "url": "http://localhost:9002"
+        "name": "console-plugin-appforge",
+        "url": "http://localhost:9001"
       }
     ]
   }
