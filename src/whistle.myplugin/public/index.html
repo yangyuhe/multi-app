@@ -8,7 +8,7 @@
     <script src="./jquery-3.7.1.min.js"></script>
     <script src="./lodash-4.17.21.min.js"></script>
     <style>
-      input {
+      input:not([type="checkbox"]) {
         width: 350px;
       }
       .log {
@@ -34,21 +34,30 @@
     </fieldset>
   </body>
   <script>
-    const renderPlugin = (prefix, index, name, value) => {
+    const renderPlugin = (prefix, index, name, value, enable) => {
       return `<div class="plugin-item" style="margin-bottom:5px;">
           <label>plugin名称：<input placeholder="例如console-plugin-appforge" required name="${prefix}.plugin[${index}].name" value="${name}"/></label>
           <label>地址：<input placeholder="例如http://localhost:9001" required name="${prefix}.plugin[${index}].url" value="${value}"/></label>
+          <label>启用:<input type="checkbox" name="${prefix}.plugin[${index}].enable" value="on" ${
+        enable ? "checked" : ""
+      }></label>
         </div>`;
     };
     const renderDomain = (index, domain, plugins) => {
       const pluginItems = plugins.map((item, subindex) => {
-        return renderPlugin(`[${index}]`, subindex, item.name, item.url);
+        return renderPlugin(
+          `[${index}]`,
+          subindex,
+          item.name,
+          item.url,
+          item.enable
+        );
       });
       const pluginHtml = `<div class="plugin-block" style="border:1px black dashed;padding:5px;margin-top:5px;">
           ${
             pluginItems.length > 0
               ? pluginItems.join("")
-              : renderPlugin(`[${index}]`, 0, "", "")
+              : renderPlugin(`[${index}]`, 0, "", "", true)
           }
         </div>`;
       return `<div data-index="${index}"" class="domain-block" style="padding: 5px; border: 1px solid black;margin-bottom:5px;">
@@ -73,7 +82,8 @@
         `[${domainBlock.data("index")}]`,
         plugins.length,
         "",
-        ""
+        "",
+        true
       );
       domainBlock.find(".plugin-block").append(newPlugin);
     });

@@ -3,5 +3,6 @@ type ConsoleConfig = {
   plugin: {
     name: string;
     url: string;
+    enable: "on" | undefined;
   }[];
 }[];

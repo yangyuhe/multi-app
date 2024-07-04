@@ -7,9 +7,17 @@ export default (
     (req: Whistle.PluginRequest, res: Whistle.PluginResponse) => {
       let url = new URL(req.fullUrl);
       const consoleConfig: ConsoleConfig = require("../public/consoleConfig.json");
-      const matchedConsoleConfig = consoleConfig.filter(
-        (i) => i.domain === "*" || i.domain === url.hostname
-      );
+
+      const matchedConsoleConfig = consoleConfig
+        .map((i) => ({
+          ...i,
+          plugin: i.plugin.filter((p) => p.enable === "on"),
+        }))
+        .filter(
+          (i) =>
+            (i.domain === "*" || i.domain === url.hostname) &&
+            i.plugin.length > 0
+        );
 
       if (matchedConsoleConfig.length > 0) {
         //写入rules.txt
