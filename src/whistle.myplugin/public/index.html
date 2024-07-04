@@ -9,7 +9,11 @@
     <script src="./lodash-4.17.21.min.js"></script>
     <style>
       input {
-        width: 300px;
+        width: 350px;
+      }
+      .log {
+        height: 300px;
+        overflow: auto;
       }
     </style>
   </head>
@@ -22,12 +26,18 @@
       method="post"
       action="/post"
     ></form>
+    <fieldset>
+      <legend>错误日志</legend>
+      <button class="refresh-log">刷新</button>
+      <button class="clear-log">清空</button>
+      <div class="log"></div>
+    </fieldset>
   </body>
   <script>
     const renderPlugin = (prefix, index, name, value) => {
       return `<div class="plugin-item" style="margin-bottom:5px;">
-          <label>plugin名称：<input required name="${prefix}.plugin[${index}].name" value="${name}"/></label>
-          <label>地址：<input required name="${prefix}.plugin[${index}].url" value="${value}"/></label>
+          <label>plugin名称：<input placeholder="例如console-plugin-appforge" required name="${prefix}.plugin[${index}].name" value="${name}"/></label>
+          <label>地址：<input placeholder="例如http://localhost:9001" required name="${prefix}.plugin[${index}].url" value="${value}"/></label>
         </div>`;
     };
     const renderDomain = (index, domain, plugins) => {
@@ -43,7 +53,7 @@
         </div>`;
       return `<div data-index="${index}"" class="domain-block" style="padding: 5px; border: 1px solid black;margin-bottom:5px;">
         <label>
-          域名：<input required  value="${domain}" name="[${index}].domain" />
+          域名：<input placeholder="例如cecstackzsnew.user.cecloud.com,*适配所有域名" required  value="${domain}" name="[${index}].domain" />
         </label>
         <button type="button" class="add-plugin" >添加plugin</button>
         ${pluginHtml}
@@ -69,20 +79,26 @@
     });
 
     let oldValue;
-    $.ajax(location.pathname + "cgi-bin/console-config").then(
-      (res) => {
-        oldValue = res;
-        if (res.length === 0) form.append(renderDomain(0, "", []), "", []);
-        else {
-          res.forEach((item, index) => {
-            form.append(renderDomain(index, item.domain, item.plugin || []));
-          });
+
+    const init = () => {
+      form.empty();
+      $.ajax(location.pathname + "cgi-bin/console-config").then(
+        (res) => {
+          oldValue = res;
+          if (res.length === 0) form.append(renderDomain(0, "", []), "", []);
+          else {
+            res.forEach((item, index) => {
+              form.append(renderDomain(index, item.domain, item.plugin || []));
+            });
+          }
+        },
+        (err) => {
+          console.error(err);
         }
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
+      );
+    };
+
+    init();
 
     const applyBtn = $(".apply");
     let newValue = [];
@@ -102,18 +118,54 @@
 
     applyBtn.on("click", () => {
       if (form[0].reportValidity()) {
-        console.log(newValue);
-        alert("应用成功");
         applyBtn.attr("disabled", true);
         $.ajax(location.pathname + "cgi-bin/console-config", {
           method: "post",
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           data: JSON.stringify(newValue),
-        }).then((res) => {
-          console.log(res);
-        });
+        })
+          .then((res) => {
+            console.log(res);
+            if (res.code !== 0) {
+              alert(res.message);
+            } else {
+              alert("保存成功");
+              init();
+            }
+          })
+          .catch((err) => {
+            alert("操作失败," + err?.message);
+          });
       }
+    });
+
+    function refreshLog() {
+      $.ajax(location.pathname + "cgi-bin/console-log").then(
+        (res) => {
+          $(".log").html(res.replace(/\n/g, "<br/>"));
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+    }
+    refreshLog();
+    $(".refresh-log").on("click", () => {
+      refreshLog();
+    });
+
+    $(".clear-log").on("click", () => {
+      $.ajax(location.pathname + "cgi-bin/console-log", {
+        method: "delete",
+      }).then(
+        (res) => {
+          $(".log").empty();
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
     });
   </script>
 </html>

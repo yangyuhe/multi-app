@@ -25,7 +25,6 @@ export default (
 
   const callback = app.callback();
   server.on("request", (req, res) => {
-    console.log("koa:", req.url);
     callback(req, res);
   });
 };

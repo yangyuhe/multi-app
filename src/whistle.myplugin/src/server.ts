@@ -1,23 +1,28 @@
-import zlib from "zlib";
 import http from "http";
+import { log } from "./log";
 
 export default (
   server: Whistle.PluginServer,
   options: Whistle.PluginOptions
 ) => {
-  console.log("server init");
   // handle http request
   server.on(
     "request",
     (req: Whistle.PluginServerRequest, res: Whistle.PluginServerResponse) => {
-      console.log("server process");
-
       //处理
       let url = new URL(req.fullUrl);
       const consoleConfig: ConsoleConfig = require("../public/consoleConfig.json");
       const matchedConsoleConfig = consoleConfig.filter(
         (i) => i.domain === "*" || i.domain === url.hostname
       );
+      if (matchedConsoleConfig.length > 0)
+        log(
+          `匹配插件${matchedConsoleConfig
+            .map((i) => i.plugin.map((i) => i.name))
+            .flat()
+            .join(",")}`
+        );
+
       if (
         matchedConsoleConfig.length > 0 &&
         url.pathname === "/console/api/plugins/plugin-manifests.json"
@@ -34,9 +39,9 @@ export default (
             let promises = [];
             for (let item of matchedConsoleConfig) {
               for (let plugin of item.plugin) {
-                let p = new Promise((res, rej) => {
+                let p = new Promise<void>((resolve, reject) => {
                   const req = http.request(
-                    plugin.url + "/plugin-manifests.json",
+                    plugin.url + "/plugin-manifest.json",
                     (res) => {
                       let content = "";
                       res.on("data", (chunk) => {
@@ -47,9 +52,18 @@ export default (
                           (i) => i.name === plugin.name
                         );
                         oldData.splice(index, 1, JSON.parse(content));
+                        log(`代理plugin-manifests.json成功`);
+                        resolve();
+                      });
+                      res.on("error", (err) => {
+                        log(plugin.name + " " + err?.toString());
                       });
                     }
                   );
+                  req.on("error", (err) => {
+                    log(plugin.name + " " + err?.toString());
+                    resolve();
+                  });
                   req.end();
                 });
                 promises.push(p);
@@ -76,12 +90,12 @@ export default (
             let html = body.join("");
             const regRes = html.match(/"consolePlugins":\[([^\]]*)\]/);
             if (regRes) {
-              console.log(regRes);
               const plugins = regRes[1].split(",");
               const newAddPlugins = [];
               for (let domain of matchedConsoleConfig) {
                 for (let plugin of domain.plugin) {
                   const pluginName = '"' + plugin.name + '"';
+
                   if (!plugins.includes(pluginName))
                     newAddPlugins.push(pluginName);
                 }
@@ -92,6 +106,7 @@ export default (
                   .join(plugins.concat(newAddPlugins).join(","));
               }
             }
+            res.writeHead(svrRes.statusCode, svrRes.headers);
             res.end(html);
           });
         });

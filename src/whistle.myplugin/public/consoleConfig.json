@@ -5,6 +5,10 @@
       {
         "name": "console-plugin-appforge",
         "url": "http://localhost:9001"
+      },
+      {
+        "name": "console-plugin-ops-dashboard",
+        "url": "http://localhost:9002"
       }
     ]
   }
