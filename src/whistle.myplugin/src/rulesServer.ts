@@ -34,6 +34,8 @@ export default (
                 `^**/console/static/umd/public/static/umd/react@17.0.1.production.min.js $1/console/static/umd/public/static/umd/react@17.0.1.development.js`,
                 `^**/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js $1/console/static/umd/public/static/umd/react-router-dom@5.2.0.js`,
                 `^**/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js $1/console/static/umd/public/static/umd/react-dom@17.0.1.development.js`,
+                `^**/console/locales/resource.json?lng=zh&ns=plugin__${plugin.name} https://localhost:${url.port}/locales/zh/plugin__${plugin.name}.json`,
+                `^**/console/locales/resource.json?lng=en&ns=plugin__${plugin.name} https://localhost:${url.port}/locales/en/plugin__${plugin.name}.json`,
                 "\n"
               );
             } else {
@@ -43,6 +45,8 @@ export default (
                 `^${item.domain}/console/static/umd/public/static/umd/react@17.0.1.production.min.js ${item.domain}/console/static/umd/public/static/umd/react@17.0.1.development.js`,
                 `^${item.domain}/console/static/umd/public/static/umd/react-router-dom@5.2.0.min.js ${item.domain}/console/static/umd/public/static/umd/react-router-dom@5.2.0.js`,
                 `^${item.domain}/console/static/umd/public/static/umd/react-dom@17.0.1.production.min.js ${item.domain}/console/static/umd/public/static/umd/react-dom@17.0.1.development.js`,
+                `^${item.domain}/console/locales/resource.json?lng=zh&ns=plugin__${plugin.name} https://localhost:${url.port}/locales/zh/plugin__${plugin.name}.json`,
+                `^${item.domain}/console/locales/resource.json?lng=en&ns=plugin__${plugin.name} https://localhost:${url.port}/locales/en/plugin__${plugin.name}.json`,
                 "\n"
               );
             }

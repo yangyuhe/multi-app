@@ -111,6 +111,7 @@
     init();
 
     const applyBtn = $(".apply");
+    const tip = $('<span style="color:red;margin-left:5px;">未保存</span>');
     let newValue = [];
     form.on("input", () => {
       newValue = [];
@@ -121,14 +122,17 @@
 
       if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
         applyBtn.attr("disabled", false);
+        applyBtn.after(tip);
       } else {
         applyBtn.attr("disabled", true);
+        tip.remove();
       }
     });
 
     applyBtn.on("click", () => {
       if (form[0].reportValidity()) {
         applyBtn.attr("disabled", true);
+        tip.remove();
         $.ajax(location.pathname + "cgi-bin/console-config", {
           method: "post",
           contentType: "application/json; charset=utf-8",

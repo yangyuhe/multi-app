@@ -9,7 +9,11 @@
       },
       {
         "name": "console-plugin-ops-dashboard",
-        "url": "http://localhost:9002",
+        "url": "http://localhost:9002"
+      },
+      {
+        "name": "console-plugin-aidphome",
+        "url": "http://localhost:9003",
         "enable": "on"
       }
     ]
