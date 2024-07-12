@@ -4,8 +4,7 @@
     "plugin": [
       {
         "name": "console-plugin-appforge",
-        "url": "http://localhost:9001",
-        "enable": "on"
+        "url": "http://localhost:9001"
       },
       {
         "name": "console-plugin-ops-dashboard",
@@ -14,6 +13,11 @@
       {
         "name": "console-plugin-aidphome",
         "url": "http://localhost:9003",
+        "enable": "on"
+      },
+      {
+        "name": "console-plugin-aidp",
+        "url": "http://10.253.172.68:9001",
         "enable": "on"
       }
     ]
