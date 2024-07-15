@@ -27,7 +27,7 @@
       action="/post"
     ></form>
     <fieldset>
-      <legend>错误日志</legend>
+      <legend>日志</legend>
       <button class="refresh-log">刷新</button>
       <button class="clear-log">清空</button>
       <div class="log"></div>
@@ -43,7 +43,7 @@
       }></label>
         </div>`;
     };
-    const renderDomain = (index, domain, plugins) => {
+    const renderDomain = (index, domain, plugins, disabledPlugins) => {
       const pluginItems = plugins.map((item, subindex) => {
         return renderPlugin(
           `[${index}]`,
@@ -66,12 +66,16 @@
         </label>
         <button type="button" class="add-plugin" >添加plugin</button>
         ${pluginHtml}
+        <fieldset>
+          <legend>禁止加载下列插件</legend>
+          <textarea name="[${index}].disabledPlugins" style="width:500px" placeholder="以逗号分隔，例如console-plugin-menu,console-plugin-sidebar">${disabledPlugins}</textarea>
+        </fieldset>
       </div>`;
     };
     const form = $(".form");
     $(".add-domain").on("click", function () {
       const curNum = form.find(".domain-block").length;
-      const newDomain = renderDomain(curNum, "", []);
+      const newDomain = renderDomain(curNum, "", [], "");
       form.append(newDomain);
     });
     form.on("click", ".add-plugin", function () {
@@ -95,10 +99,17 @@
       $.ajax(location.pathname + "cgi-bin/console-config").then(
         (res) => {
           oldValue = res;
-          if (res.length === 0) form.append(renderDomain(0, "", []), "", []);
+          if (res.length === 0) form.append(renderDomain(0, "", [], ""));
           else {
             res.forEach((item, index) => {
-              form.append(renderDomain(index, item.domain, item.plugin || []));
+              form.append(
+                renderDomain(
+                  index,
+                  item.domain,
+                  item.plugin || [],
+                  item.disabledPlugins || ""
+                )
+              );
             });
           }
         },
@@ -144,7 +155,6 @@
             if (res.code !== 0) {
               alert(res.message);
             } else {
-              alert("保存成功");
               init();
             }
           })

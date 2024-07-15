@@ -17,9 +17,9 @@
       },
       {
         "name": "console-plugin-aidp",
-        "url": "http://10.253.172.68:9001",
-        "enable": "on"
+        "url": "http://10.253.172.68:9001"
       }
-    ]
+    ],
+    "disabledPlugins": ""
   }
 ]

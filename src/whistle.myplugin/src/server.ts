@@ -98,9 +98,18 @@ export default (
             let html = body.join("");
             const regRes = html.match(/"consolePlugins":\[([^\]]*)\]/);
             if (regRes) {
-              const plugins = regRes[1].split(",");
+              let plugins = regRes[1].split(",");
               const newAddPlugins = [];
+
               for (let domain of matchedConsoleConfig) {
+                const disabledPlugins = domain.disabledPlugins
+                  .split(",")
+                  .map((item) => `"${item.trim()}"`);
+
+                plugins = plugins.filter(
+                  (item) => !disabledPlugins.includes(item)
+                );
+
                 for (let plugin of domain.plugin) {
                   const pluginName = '"' + plugin.name + '"';
 
@@ -108,11 +117,9 @@ export default (
                     newAddPlugins.push(pluginName);
                 }
               }
-              if (newAddPlugins.length > 0) {
-                html = html
-                  .split(regRes[1])
-                  .join(plugins.concat(newAddPlugins).join(","));
-              }
+              html = html
+                .split(regRes[1])
+                .join(plugins.concat(newAddPlugins).join(","));
             }
             res.writeHead(svrRes.statusCode, svrRes.headers);
             res.end(html);
