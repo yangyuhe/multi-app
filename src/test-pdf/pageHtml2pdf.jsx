@@ -4,6 +4,7 @@ import html2pdf from "html2pdf.js";
 import { Input, Modal } from "@arco-design/web-react";
 import "@arco-themes/react-ocean-design/css/arco.css";
 import html2canvas from "html2canvas";
+import * as htmlToImage from "html-to-image";
 
 function App() {
   const iframeRef = React.useRef();
@@ -24,13 +25,17 @@ function App() {
         visible={visible}
         onCancel={() => setVisible(false)}
         onOk={() => {
-          html2pdf(iframeRef.current)
-            .then((res) => {
-              console.log("success");
-            })
-            .catch((err) => {
-              console.error(err);
+          return htmlToImage.toPng(iframeRef.current).then(function (dataUrl) {
+            const img = new Image();
+            img.src = dataUrl;
+            img.width = 400;
+            return img.decode().then(() => {
+              return html2pdf(img, {
+                margin: 20,
+                html2canvas: { scale: 3, width: 800 },
+              });
             });
+          });
           // html2canvas(iframeRef.current.parentElement).then(function (canvas) {
           //   document.body.appendChild(canvas);
           // });
