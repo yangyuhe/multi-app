@@ -1,7 +1,0 @@
-{
-    "extends":"../../tsconfig.json",
-    "compilerOptions": {
-        "lib": ["DOM"]
-    },
-    "files": ["./src/web/index.ts"]
-}
