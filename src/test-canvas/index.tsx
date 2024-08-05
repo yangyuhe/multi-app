@@ -10,7 +10,7 @@ function App() {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const canvasWidth = 500;
   const canvasHeight = 500;
-  const visual: Coor = { x: 0, y: 0, z: 300 };
+  const visual: Coor = { x: 100, y: 100, z: 300 };
   const pointMap = {
     A: [-50, 50, 50],
     B: [-50, 50, -50],
@@ -30,67 +30,74 @@ function App() {
       offsetX = canvasWidth / 2,
       offsetY = canvasHeight / 2
     ) => {
+      const xVal =
+        ((x - visual.x) * visual.z) / (visual.z - z) + visual.x + offsetX;
+      const yVal =
+        ((y - visual.y) * visual.z) / (visual.z - z) + visual.y + offsetY;
+      console.log(xVal, yVal);
       return {
-        x: ((x - visual.x) * visual.z) / (visual.z - z) + offsetX,
-        y: ((y - visual.y) * visual.z) / (visual.z - z) + offsetY,
+        x: xVal,
+        y: yVal,
       };
     };
     const ctx = canvasRef.current.getContext("2d");
+    ctx.beginPath();
+
     let point;
-    // ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     // 绘制矩形ABCD
     ctx.beginPath();
-    point = transformCoordinatePoint.apply(null, ...pointMap.A);
+    point = transformCoordinatePoint.apply(null, pointMap.A);
     ctx.moveTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.B);
+    point = transformCoordinatePoint.apply(null, pointMap.B);
     ctx.lineTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.C);
+    point = transformCoordinatePoint.apply(null, pointMap.C);
     ctx.lineTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.D);
+    point = transformCoordinatePoint.apply(null, pointMap.D);
     ctx.lineTo(point.x, point.y);
     ctx.closePath();
     ctx.stroke();
     // 绘制矩形EFGH
     ctx.beginPath();
-    point = transformCoordinatePoint(...pointMap.E);
+    point = transformCoordinatePoint.apply(null, pointMap.E);
     ctx.moveTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.F);
+    point = transformCoordinatePoint.apply(null, pointMap.F);
     ctx.lineTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.G);
+    point = transformCoordinatePoint.apply(null, pointMap.G);
     ctx.lineTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.H);
+    point = transformCoordinatePoint.apply(null, pointMap.H);
     ctx.lineTo(point.x, point.y);
     ctx.closePath();
     ctx.stroke();
     // 绘制直线AE
     ctx.beginPath();
-    point = transformCoordinatePoint(...pointMap.A);
+    point = transformCoordinatePoint.apply(null, pointMap.A);
     ctx.moveTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.E);
+    point = transformCoordinatePoint.apply(null, pointMap.E);
     ctx.lineTo(point.x, point.y);
     ctx.stroke();
     ctx.closePath();
     // 绘制直线BF
     ctx.beginPath();
-    point = transformCoordinatePoint(...pointMap.B);
+    point = transformCoordinatePoint.apply(null, pointMap.B);
     ctx.moveTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.F);
+    point = transformCoordinatePoint.apply(null, pointMap.F);
     ctx.lineTo(point.x, point.y);
     ctx.stroke();
     ctx.closePath();
     // 绘制直线CD
     ctx.beginPath();
-    point = transformCoordinatePoint(...pointMap.C);
+    point = transformCoordinatePoint.apply(null, pointMap.C);
     ctx.moveTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.G);
+    point = transformCoordinatePoint.apply(null, pointMap.G);
     ctx.lineTo(point.x, point.y);
     ctx.stroke();
     ctx.closePath();
     // 绘制直线DH
     ctx.beginPath();
-    point = transformCoordinatePoint(...pointMap.D);
+    point = transformCoordinatePoint.apply(null, pointMap.D);
     ctx.moveTo(point.x, point.y);
-    point = transformCoordinatePoint(...pointMap.H);
+    point = transformCoordinatePoint.apply(null, pointMap.H);
     ctx.lineTo(point.x, point.y);
     ctx.stroke();
     ctx.closePath();
@@ -98,7 +105,9 @@ function App() {
   return (
     <canvas
       id="canvas"
-      style={{ width: "500px", height: "500px" }}
+      height={canvasHeight}
+      width={canvasWidth}
+      style={{ border: "1px solid red" }}
       ref={canvasRef}
     ></canvas>
   );
