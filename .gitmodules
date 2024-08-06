@@ -37,3 +37,6 @@
 [submodule "github/learning-threejs-third"]
 	path = github/learning-threejs-third
 	url = https://github.com/josdirksen/learning-threejs-third.git
+[submodule "github/html2canvas"]
+	path = github/html2canvas
+	url = https://github.com/niklasvh/html2canvas.git
