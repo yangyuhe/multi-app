@@ -40,3 +40,6 @@
 [submodule "github/html2canvas"]
 	path = github/html2canvas
 	url = https://github.com/niklasvh/html2canvas.git
+[submodule "github/vscode"]
+	path = github/vscode
+	url = https://github.com/microsoft/vscode.git
