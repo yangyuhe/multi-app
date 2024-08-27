@@ -3,6 +3,7 @@ const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 const dirs = fs.readdirSync(path.resolve(__dirname, "src"));
 const ignores = fs
@@ -68,6 +69,7 @@ module.exports = {
     }),
     new MiniCssExtractPlugin(),
     new ReactRefreshWebpackPlugin(),
+    new WebpackManifestPlugin({}),
   ],
   optimization: {
     splitChunks: {
