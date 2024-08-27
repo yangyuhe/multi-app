@@ -43,3 +43,6 @@
 [submodule "github/vscode"]
 	path = github/vscode
 	url = https://github.com/microsoft/vscode.git
+[submodule "github/xyflow-web"]
+	path = github/xyflow-web
+	url = https://github.com/xyflow/web.git
