@@ -6,12 +6,14 @@ import {
   BackgroundVariant,
   BaseEdge,
   Controls,
+  Edge,
   EdgeLabelRenderer,
   getBezierPath,
   getSimpleBezierPath,
   getSmoothStepPath,
   getStraightPath,
   Handle,
+  MarkerType,
   MiniMap,
   Position,
   ReactFlow,
@@ -36,14 +38,17 @@ const initialNodes = [
     data: { label: "2" },
   },
 ];
-const initialEdges = [
-  { id: "e1-2", source: "1", target: "2", type: "custom-edge" },
+const initialEdges: Edge[] = [
+  {
+    id: "e1-2",
+    source: "1",
+    target: "2",
+  },
 ];
 
 const handleStyle = { left: 10 };
 
 function TextUpdaterNode(props) {
-  console.log(props);
   const onChange = useCallback((evt) => {
     console.log(evt.target.value);
   }, []);
@@ -66,14 +71,15 @@ function TextUpdaterNode(props) {
   );
 }
 
-function CustomEdge({ id, sourceX, sourceY, targetX, targetY }) {
+function CustomEdge(props) {
+  console.log(props);
+  const { id, sourceX, sourceY, targetX, targetY } = props;
   const res = getSmoothStepPath({
     sourceX,
     sourceY,
     targetX,
     targetY,
   });
-  console.log(res);
   const [edgePath, labelX, labelY] = res;
 
   const { setEdges } = useReactFlow();
@@ -125,6 +131,9 @@ function App() {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         edgeTypes={edgeTypes}
+        defaultEdgeOptions={{
+          markerEnd: { type: MarkerType.Arrow },
+        }}
       >
         <Controls />
         <MiniMap />
