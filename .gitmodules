@@ -46,3 +46,6 @@
 [submodule "github/xyflow-web"]
 	path = github/xyflow-web
 	url = https://github.com/xyflow/web.git
+[submodule "github/xyflow"]
+	path = github/xyflow
+	url = https://github.com/xyflow/xyflow.git
