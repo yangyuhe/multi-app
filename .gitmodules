@@ -49,3 +49,6 @@
 [submodule "github/xyflow"]
 	path = github/xyflow
 	url = https://github.com/xyflow/xyflow.git
+[submodule "github/react-redux"]
+	path = github/react-redux
+	url = https://github.com/reduxjs/react-redux.git
