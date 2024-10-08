@@ -52,3 +52,6 @@
 [submodule "github/react-redux"]
 	path = github/react-redux
 	url = https://github.com/reduxjs/react-redux.git
+[submodule "github/vscode-extension-samples"]
+	path = github/vscode-extension-samples
+	url = https://github.com/microsoft/vscode-extension-samples.git
