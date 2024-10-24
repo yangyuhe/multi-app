@@ -1,0 +1,24 @@
+{
+  "name": "test-esbuild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@types/node": "^22.7.7",
+    "esbuild": "^0.24.0",
+    "esbuild-plugin-alias": "^0.2.1",
+    "esbuild-plugin-globals": "^0.2.0",
+    "esbuild-plugins-node-modules-polyfill": "^1.6.7"
+  },
+  "dependencies": {
+    "esbuild-plugin-polyfill-node": "^0.3.0",
+    "mac-ca": "^3.1.0"
+  }
+}

@@ -85,6 +85,7 @@
   "workspaces": [
     "src/*",
     "!src/test-rollup",
-    "!src/helloworld"
+    "!src/helloworld",
+    "!src/test-esbuild"
   ]
 }
