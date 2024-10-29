@@ -1,0 +1,19 @@
+{
+  "name": "test-memfs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "memfs": "^4.14.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "esbuild-plugin-polyfill-node": "^0.3.0"
+  }
+}
