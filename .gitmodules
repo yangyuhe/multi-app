@@ -58,3 +58,6 @@
 [submodule "github/esbuild"]
 	path = github/esbuild
 	url = git@github.com:evanw/esbuild.git
+[submodule "github/memfs"]
+	path = github/memfs
+	url = https://github.com/streamich/memfs.git
