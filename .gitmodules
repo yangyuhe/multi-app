@@ -61,3 +61,6 @@
 [submodule "github/memfs"]
 	path = github/memfs
 	url = https://github.com/streamich/memfs.git
+[submodule "github/babel"]
+	path = github/babel
+	url = https://github.com/babel/babel.git
