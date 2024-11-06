@@ -1,40 +1,13 @@
-self.addEventListener("message", async (evt) => {
+const broadcast = new BroadcastChannel("count-channel");
+addEventListener("fetch", async (evt) => {
   console.log(evt);
-  const clientId = evt.source.id;
-
-  if (!clientId || !self.clients) {
-    return;
+  console.log("拦截：", evt.request.url);
+  const client = await globalThis.clients.get(evt.clientId);
+  if (client.type === "worker") {
+    broadcast.postMessage("hello");
   }
-
-  const client = await self.clients.get(clientId);
-
-  if (!client) {
-    return;
-  }
-
-  const allClients = await self.clients.matchAll({
-    type: "window",
-  });
 });
 
-const version = "v19";
-self.addEventListener("install", (evt) => {
-  console.log(version + " installed");
-  self.skipWaiting();
-});
-
-self.addEventListener("activate", (evt) => {
-  console.log(version + " activated");
-  evt.waitUntil(self.clients.claim());
-});
-
-self.addEventListener("fetch", async (evt) => {
-  console.log(
-    version + " fetched " + evt.request.url,
-    "referrer:",
-    evt.request.referrer
-  );
-  // evt.respondWith(fetch(evt.request));
-});
-
-console.log(version + " init " + new Date().toLocaleString());
+broadcast.onmessage = (event) => {
+  console.log(event.data);
+};
