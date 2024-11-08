@@ -5,6 +5,7 @@ addEventListener("fetch", async (evt) => {
   const client = await globalThis.clients.get(evt.clientId);
   if (client.type === "worker") {
     broadcast.postMessage("hello");
+    // client.postMessage("hello");
   }
 });
 

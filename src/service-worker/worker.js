@@ -1,3 +1,4 @@
+console.log("worker globalthis:", globalThis);
 addEventListener("message", (evt) => {
   console.log("worker:", evt);
 });
