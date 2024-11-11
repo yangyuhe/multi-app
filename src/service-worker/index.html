@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script>
-      navigator.serviceWorker.register("/sw.js");
-      navigator.serviceWorker.ready.then((sw) => {
-        let w = new Worker("/worker.js", { type: "module", name: "myworker" });
-        console.log("w:", w);
-        w.onmessage = function () {
-          console.log("work message ");
-        };
-        w.postMessage("good");
-      });
-      window.onmessage = function (evt) {
-        console.log("evt:", evt.data);
-      };
+      // navigator.serviceWorker.register("/sw.js");
+      // navigator.serviceWorker.ready.then((sw) => {
+      //   let w = new Worker("/worker.js", { type: "module", name: "myworker" });
+      //   console.log("w:", w);
+      //   w.onmessage = function () {
+      //     console.log("work message ");
+      //   };
+      //   w.postMessage("good");
+      // });
+      // window.onmessage = function (evt) {
+      //   console.log("evt:", evt.data);
+      // };
+      let w = new Worker("/worker.js", { type: "module" });
+      console.log(w);
+      w.postMessage("hello");
     </script>
   </head>
   <body></body>

@@ -1,3 +1,1 @@
-export function add() {
-  console.log("add func called");
-}
+console.log("util1");
