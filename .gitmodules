@@ -64,3 +64,6 @@
 [submodule "github/babel"]
 	path = github/babel
 	url = https://github.com/babel/babel.git
+[submodule "github/label-studio"]
+	path = github/label-studio
+	url = https://github.com/HumanSignal/label-studio.git
