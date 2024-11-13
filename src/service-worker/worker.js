@@ -6,17 +6,11 @@
 //   console.log("worker:", evt);
 // };
 
-// postMessage("bug");
-// setTimeout(() => {
-//   import("/util.js").then((res) => {
-//     res.add();
-//   });
-// }, 1000);
+postMessage("bug");
 
-// const broadcast = new BroadcastChannel("count-channel");
-// broadcast.onmessage = (event) => {
-//   console.log("worker msg:", event.data);
-// };
-
-import "./util.js";
-import "./util2.js";
+console.log("this is worker");
+const broadcast = new BroadcastChannel("count-channel");
+broadcast.onmessage = (event) => {
+  console.log("worker msg:", event.data);
+};
+import "/util.js";

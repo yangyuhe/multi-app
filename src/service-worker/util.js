@@ -1,1 +1,4 @@
-console.log("util1");
+console.log("this is util");
+export function add() {
+  console.log("add func called");
+}

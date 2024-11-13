@@ -1,0 +1,6 @@
+.image {
+  background-size: cover;
+  background-image: url(./test.jpeg);
+  width: 200px;
+  height: 200px;
+}

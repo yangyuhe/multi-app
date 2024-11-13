@@ -10,7 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/generator": "^7.26.2",
     "@babel/parser": "^7.26.2",
-    "@babel/traverse": "^7.25.7"
+    "@babel/traverse": "^7.25.7",
+    "@babel/types": "^7.26.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
   }
 }
