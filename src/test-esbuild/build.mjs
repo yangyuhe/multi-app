@@ -5,7 +5,7 @@ import * as path from "path";
 import GlobalsPlugin from "esbuild-plugin-globals";
 
 let result = await esbuild.build({
-  entryPoints: ["src/app.ts"],
+  entryPoints: ["src/app.js"],
   bundle: true,
   outdir: "dist",
   mainFields: [""],
@@ -17,17 +17,6 @@ let result = await esbuild.build({
   },
   format: "iife",
   external: ["vscode", "esbuild", "./xhr-sync-worker.js", "worker_threads"],
-  plugins: [
-    polyfillNode({
-      // Options (optional)
-      polyfills: {
-        worker_threads: false,
-        fs: true,
-      },
-    }),
-    GlobalsPlugin({
-      "node-fetch": "window.fetch",
-    }),
-  ],
+  plugins: [],
 });
 console.log(result);
