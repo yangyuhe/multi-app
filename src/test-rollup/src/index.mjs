@@ -1,3 +1,4 @@
+import "./global.mjs";
 import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
 import generate from "@babel/generator";

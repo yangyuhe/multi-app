@@ -1,6 +1,5 @@
-module.export = function () {
-  console.log("this is default");
-};
-module.exports.say = function () {
+if (process.env.PATH === "./dir") {
   console.log("hello");
-};
+}
+const path = process.env.PATH;
+console.log(path);

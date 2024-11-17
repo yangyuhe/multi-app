@@ -20,6 +20,9 @@ importers:
       '@babel/types':
         specifier: ^7.26.0
         version: 7.26.0
+      esbuild-plugin-define:
+        specifier: ^0.5.0
+        version: 0.5.0(esbuild@0.24.0)
     devDependencies:
       esbuild:
         specifier: ^0.24.0
@@ -231,6 +234,12 @@ packages:
       supports-color:
         optional: true
 
+  esbuild-plugin-define@0.5.0:
+    resolution: {integrity: sha512-GNchZYjo8nQHLYbvTIi9w6MXj1lzi1yPEnfsHpeTRbTx2g0+g79ngoU0N5hS5EQwfpzTUzZKETx16UO8W8dW0g==}
+    engines: {node: '>=18.14.0'}
+    peerDependencies:
+      esbuild: '>=0.15'
+
   esbuild@0.24.0:
     resolution: {integrity: sha512-FuLPevChGDshgSicjisSooU0cemp/sGXR841D5LHMB7mTVOmsEHcAxaH3irL53+8YDIeVNQEySh4DaYU/iuPqQ==}
     engines: {node: '>=18'}
@@ -393,6 +402,10 @@ snapshots:
   debug@4.3.7:
     dependencies:
       ms: 2.1.3
+
+  esbuild-plugin-define@0.5.0(esbuild@0.24.0):
+    dependencies:
+      esbuild: 0.24.0
 
   esbuild@0.24.0:
     optionalDependencies:
