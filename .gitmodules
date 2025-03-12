@@ -73,3 +73,6 @@
 [submodule "github/react-router"]
 	path = github/react-router
 	url = https://github.com/remix-run/react-router.git
+[submodule "github/tapable"]
+	path = github/tapable
+	url = https://github.com/webpack/tapable.git
