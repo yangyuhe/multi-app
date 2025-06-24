@@ -7,5 +7,15 @@
       },
       "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-      }
+      },
+      "i18n-ally.localesPaths": [
+        "dify/web/i18n",
+        "monaco-editor/src/language",
+        "github/vscode/extensions/git-base/languages",
+        "dify/web/public/vs/language",
+        "github/vscode/out/vs/editor/common/languages",
+        "github/vscode/out/vs/workbench/services/language",
+        "github/vscode/src/vs/editor/common/languages",
+        "github/vscode/src/vs/workbench/services/language"
+      ]
 }

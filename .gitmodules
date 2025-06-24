@@ -76,3 +76,27 @@
 [submodule "github/tapable"]
 	path = github/tapable
 	url = https://github.com/webpack/tapable.git
+[submodule "github/webpack-dev-server"]
+	path = github/webpack-dev-server
+	url = https://github.com/webpack/webpack-dev-server.git
+[submodule "github/react-refresh-webpack-plugin"]
+	path = github/react-refresh-webpack-plugin
+	url = https://github.com/pmmmwh/react-refresh-webpack-plugin.git
+[submodule "github/continue"]
+	path = github/continue
+	url = https://github.com/continuedev/continue.git
+[submodule "github/open-webui"]
+	path = github/open-webui
+	url = https://github.com/open-webui/open-webui.git
+[submodule "gitlab/react-markdown"]
+	path = gitlab/react-markdown
+	url = https://github.com/remarkjs/react-markdown.git
+[submodule "github/mermaid"]
+	path = github/mermaid
+	url = https://github.com/mermaid-js/mermaid.git
+[submodule "github/tiptap"]
+	path = github/tiptap
+	url = https://github.com/ueberdosis/tiptap.git
+[submodule "github/whistle"]
+	path = github/whistle
+	url = https://github.com/avwo/whistle.git
