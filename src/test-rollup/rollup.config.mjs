@@ -4,6 +4,7 @@ import json from "@rollup/plugin-json";
 import consts from "rollup-plugin-consts";
 import replace from "rollup-plugin-replace";
 import resolve from "@rollup/plugin-node-resolve";
+import nodePolyfills from "rollup-plugin-polyfill-node";
 
 export default [
   {
@@ -24,6 +25,9 @@ export default [
       }),
       commonjs(),
       json(),
+      nodePolyfills({
+        include: ["path"],
+      }),
     ],
   },
 ];

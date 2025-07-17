@@ -1,41 +1,32 @@
 import "./global.mjs";
-import * as parser from "@babel/parser";
+import parser from "@babel/parser";
 import traverse from "@babel/traverse";
 import generate from "@babel/generator";
 import t from "@babel/types";
+import "@babel/preset-react";
+import * as Babel from "@babel/core";
+
+Babel.transform();
 
 const code = `
-let a='a';
-function test(){
-  let c=new Worker("url");
-  c=2;
-  let d=e;
-  lanl=''
-
-}
+    let r;
+    r=require("hello");
 
 
+
+
+  
 `;
-
-const ast = parser.parse(code);
-traverse(ast, {
-  NewExpression(path) {
-    if (path.node.callee.name === "Worker") {
-      path.node.arguments.push(t.stringLiteral("hello"));
-      console.log(path.scope);
-    }
-  },
-  Identifier(path) {
-    if (path.node.name === "a") {
-      debugger;
-    }
-  },
-  Program(path) {
-    if (!path.scope.globals.Worker) {
-      path.stop();
-    }
-  },
+const ast = parser.parse(code, {
+  plugins: ["jsx"],
 });
 
-const output = generate(ast);
-console.log(output.code);
+traverse.default(ast, {
+  CallExpression(path) {
+    const p = path.findParent((p) => {
+      return p.isAssignmentExpression();
+    });
+    console.log(p.node.left);
+    console.log(p.get("left").toString());
+  },
+});
